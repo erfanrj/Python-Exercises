@@ -1,0 +1,101 @@
+class Student:
+	def readData(self):
+		self.name = input("Enter name :")
+		self.stno = int(input("Enter stno :"))
+		self.ave = float(input("Enter average :"))
+	def getAve (self):
+		return self.ave
+	def getStno(self):
+		return self.stno
+	def display(self) :
+		print("Name          Average       Stno")
+		print("________________________________")
+		print(self.name, ""*10,self.ave,""*10,self.stno)
+		print("_"*35)
+# end of class definition
+
+#menu() function to creat menu
+def menu():
+	print()
+	print("1.  Enter a Student ")
+	print("2.  Find best student ")
+	print("3.  Delete a student ")
+	print("4.  search a student ")
+	print("5.  report list      ")
+	print("6.  Exit ")
+	choice = int(input("\n Enter your select(1-6) :"))
+	return choice
+# end of menu function
+
+# findMax() function
+def findMax():
+	# mAve is maximum ave
+	mAve = st[0].gatAve() #mAve = first ave
+	p = 0 # p is the position of maximum element
+	i = 1 # index for list of students
+	while i<len(st):
+		if st[i].getAve()>mAve:
+			mAve = st[i].getAve()
+			p = i
+			print("student with max ave :")
+			st[p].display()
+# end of findMax function
+
+# search student function
+def searchStudent():
+	stno = int(input("Enter stno to search :"))
+	i = 0 # index for list st
+	found = False # student not found
+	while i<len(st) and not found :
+		if st[i].getStno() == stno :
+			found = True
+	if not found :
+		print("Student with " ,stno ," not exist . ")
+	else :
+		print("Student with ",stno," exist")
+		st[i].display()
+# end of search Student
+
+# report() function
+def report():
+	i = 0 #index for list
+	while i <len(st) :
+		st[i].display()
+		i+=1
+	# end of while
+#end of report
+
+# delStudent function
+def delStudent():
+	stno = int(input("Enter stno to delet :"))
+	i = 0 # index for list st
+	found = False
+	while i <len(st) and not found :
+		if st[i].getStno()==stno:
+			found = True
+	if not found :
+		print("Student with stno " ,stno ," not exist . ")
+	else :
+		st.pop(i) #delet Student
+		print("Student with stno " ,stno ," deleted . ")
+# end of delStudent
+
+### start of main Prog
+st = [] # list of students
+st1 = Student() # a student object for reading
+while True :
+	c = menu()
+	if c==1:
+		st1.readData()
+		st.append(st1)
+	elif c==2 :
+		findMax()
+	elif c==3 :
+		delStudent()
+	elif c==4 :
+		searchStudent()
+	elif c==5:
+		report()
+	else :
+		break
+# end of while
